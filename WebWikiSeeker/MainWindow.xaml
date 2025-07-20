@@ -5,26 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WebWikiSeeker"
         mc:Ignorable="d"
-        Title="Web Seeker" Height="450" Width="600">
+        Title="Wiki Seeker" Height="450" Width="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MaxHeight="50"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <WrapPanel Grid.Row="0">
             <TextBlock Text="Search" HorizontalAlignment="Left"/>
-            <TextBox x:Name="searchBox" Text="" FontSize="14" MinWidth="200" BorderBrush="#FF10515D" BorderThickness="1" FontFamily="Trebuchet MS"  HorizontalAlignment="Center"></TextBox>
+            <TextBox x:Name="searchBox" Text="" FontSize="14" MinWidth="200" BorderBrush="#FF10515D" BorderThickness="1" FontFamily="Trebuchet MS"  HorizontalAlignment="Center" KeyDown="OnSearchTextKeydown"></TextBox>
             <Button Content="Search" FontFamily="Segoe UI Semibold" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" HorizontalAlignment="Right" Click="Button_Click"/>
         </WrapPanel>
         <ScrollViewer Grid.Row="1">
             <WrapPanel x:Name="CardsPanel">
                 <WrapPanel.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFACD4AC"/>
-                        <GradientStop Color="#FF339A30" Offset="1"/>
+                        <GradientStop Color="#FFACE4AC"/>
+                        <GradientStop Color="#FFe1f8e1" Offset="1"/>
                     </LinearGradientBrush>
                 </WrapPanel.Background>
             </WrapPanel>

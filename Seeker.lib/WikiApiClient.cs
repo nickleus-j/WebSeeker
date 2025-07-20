@@ -68,22 +68,5 @@ namespace Seeker.lib
             WikipediaSearchResult result =  mapper.MapSearchJsonToObject(jsonObj);
             return result;
         }
-        public string CallWiki(string searchTerm)
-        {
-            string url = "https://en.wikipedia.org/wiki/Axis_powers";
-            string result = "";
-
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
-                    {
-                        result = content.ReadAsStringAsync().Result;
-                    }
-                }
-            }
-            return result;
-        }
     }
 }

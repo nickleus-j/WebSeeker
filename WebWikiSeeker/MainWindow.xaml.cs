@@ -34,9 +34,15 @@ namespace WebWikiSeeker
 
             foreach (var item in result.Query.Search)
             {
-                TextBlock resultLbl = new TextBlock();
-                resultLbl.Text = $"Title: {item.Title}, Snippet: {item.Snippet}";
-                CardsPanel.Children.Add(resultLbl);
+                SearchCard card= new SearchCard(item);
+                CardsPanel.Children.Add(card);
+            }
+        }
+        private void OnSearchTextKeydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                Search();
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e)

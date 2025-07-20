@@ -25,6 +25,8 @@ namespace Seeker.lib
     {
         [JsonPropertyName("totalhits")]
         public int TotalHits { get; set; }
+        [JsonPropertyName("suggestion")]
+        public string suggestion { get; set; }
     }
 
     public class SearchItem
