@@ -26,7 +26,7 @@ namespace WebWikiSeeker
             WikiApiClient client = new WikiApiClient();
             return client.SearchForArticleAsync(searchBox.Text).Result;
         }
-        public void Search()
+        public async Task Search()
         {
             var result = SearchWiki();
 
@@ -37,17 +37,24 @@ namespace WebWikiSeeker
                 SearchCard card= new SearchCard(item);
                 CardsPanel.Children.Add(card);
             }
+            return;
         }
         private void OnSearchTextKeydown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
             {
-                Search();
+                Dispatcher.Invoke(() =>
+                {
+                    Search(); 
+                });
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Search();
+            Dispatcher.Invoke(() =>
+            {
+                Search();
+            });
         }
     }
 }
