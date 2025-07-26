@@ -68,5 +68,45 @@ namespace Seeker.lib
             WikipediaSearchResult result =  mapper.MapSearchJsonToObject(jsonObj);
             return result;
         }
+        public async Task<string> SearchOpenArticlesAsync(string searchTerm)
+        {
+            string encodedSearch = HttpUtility.UrlEncode(searchTerm);
+
+            // Search for pages
+            string searchUrl = $"https://en.wikipedia.org/w/api.php?action=opensearch&search={encodedSearch}&limit=10&format=json&origin=*";
+
+
+            try
+            {
+                string result = "[]";
+
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage response = client.GetAsync(searchUrl).Result)
+                    {
+                        using (HttpContent content = response.Content)
+                        {
+                            result = content.ReadAsStringAsync().Result;
+                        }
+                    }
+                }
+
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return $"{{ \"error\": \"{ex.Message}\" }}";
+            }
+        }
+        public async Task<OpenSearchResult> SearchArticlesAsync(string searchTerm)
+        {
+            string encodedSearch = HttpUtility.UrlEncode(searchTerm);
+            string jsonObj = await SearchOpenArticlesAsync(searchTerm);
+
+            var mapper = new OpenSearchMapper();
+            OpenSearchResult result = mapper.MapOpenSearchJson(jsonObj);
+            return result;
+        }
     }
 }

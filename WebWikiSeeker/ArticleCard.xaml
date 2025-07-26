@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="WebWikiSeeker.ArticleCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WebWikiSeeker"
+             mc:Ignorable="d" 
+                      d:DesignHeight="350" d:DesignWidth="500" Margin="8,5,2,3" Background="#BFD0D1EC">
+    <Grid Margin="3,2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="22" TextWrapping="Wrap" ></TextBlock>
+        <TextBox Grid.Row="1" Text="{Binding Url, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" Margin="0,0,0,5" BorderBrush="#7F405040" BorderThickness="2"/>
+    </Grid>
+</UserControl>

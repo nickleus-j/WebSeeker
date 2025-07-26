@@ -21,10 +21,10 @@ namespace WebWikiSeeker
         {
             InitializeComponent();
         }
-        public WikipediaSearchResult SearchWiki()
+        public OpenSearchResult SearchWiki()
         {
             WikiApiClient client = new WikiApiClient();
-            return client.SearchForArticleAsync(searchBox.Text).Result;
+            return client.SearchArticlesAsync(searchBox.Text).Result;
         }
         public async Task Search()
         {
@@ -32,9 +32,9 @@ namespace WebWikiSeeker
 
             CardsPanel.Children.Clear();
 
-            foreach (var item in result.Query.Search)
+            foreach (var item in result.Results)
             {
-                SearchCard card= new SearchCard(item);
+                ArticleCard card= new ArticleCard(item);
                 CardsPanel.Children.Add(card);
             }
             return;
