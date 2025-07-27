@@ -21,20 +21,21 @@ namespace WebWikiSeeker
         {
             InitializeComponent();
         }
-        public OpenSearchResult SearchWiki()
+        public async Task<OpenSearchResult> SearchWiki()
         {
             WikiApiClient client = new WikiApiClient();
-            return client.SearchArticlesAsync(searchBox.Text).Result;
+            return await client.SearchArticlesAsync(searchBox.Text);
         }
         public async Task Search()
         {
-            var result = SearchWiki();
+            var result = await SearchWiki();
 
             CardsPanel.Children.Clear();
 
             foreach (var item in result.Results)
             {
                 ArticleCard card= new ArticleCard(item);
+                card.FetchArticleClick += ReadArticle_ButtonClicked;
                 CardsPanel.Children.Add(card);
             }
             return;
@@ -55,6 +56,19 @@ namespace WebWikiSeeker
             {
                 Search();
             });
+        }
+        private void ReadArticle_ButtonClicked(object sender, RoutedEventArgs e)
+        {
+            if (sender is ArticleCard control)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    WikiApiClient wikiClient = new WikiApiClient();
+                    WikiParseResult result = wikiClient.GetParsedArticlesAsync(control.Title).Result;
+                    ArticleReader.NavigateToString(result.Parse.Text.HtmlContent);
+                    //ArticleReader.Source = new Uri(control.ArticleUrl);
+                });
+            }
         }
     }
 }

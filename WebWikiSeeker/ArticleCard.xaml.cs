@@ -22,6 +22,8 @@ namespace WebWikiSeeker
     public partial class ArticleCard : UserControl
     {
         protected OpenSearchItem Model { get; set; }
+        public string Title => Model?.Title ?? String.Empty;
+        public string ArticleUrl=> Model?.Url ?? String.Empty;
         public ArticleCard(OpenSearchItem _model = null)
         {
             if (_model == null)
@@ -38,6 +40,19 @@ namespace WebWikiSeeker
             {
 
             }
+        }
+        public static readonly RoutedEvent FetchArticleClickEvent =
+        EventManager.RegisterRoutedEvent("FetchArticleClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ArticleCard));
+
+        public event RoutedEventHandler FetchArticleClick
+        {
+            add { AddHandler(FetchArticleClickEvent, value); }
+            remove { RemoveHandler(FetchArticleClickEvent, value); }
+        }
+
+        private void FetchArticle_Click(object sender, RoutedEventArgs e)
+        {
+            RaiseEvent(new RoutedEventArgs(FetchArticleClickEvent));
         }
     }
 }

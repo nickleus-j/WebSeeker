@@ -12,14 +12,15 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MaxWidth="300"/>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <WrapPanel Grid.Row="0">
+        <WrapPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <TextBlock Text="Search" HorizontalAlignment="Left"/>
             <TextBox x:Name="searchBox" Text="" FontSize="14" MinWidth="200" BorderBrush="#FF10515D" BorderThickness="1" FontFamily="Trebuchet MS"  HorizontalAlignment="Center" KeyDown="OnSearchTextKeydown"></TextBox>
             <Button Content="Search" FontFamily="Segoe UI Semibold" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" HorizontalAlignment="Right" Click="Button_Click"/>
         </WrapPanel>
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Grid.Row="1" Grid.Column="0">
             <WrapPanel x:Name="CardsPanel">
                 <WrapPanel.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -29,6 +30,8 @@
                 </WrapPanel.Background>
             </WrapPanel>
         </ScrollViewer>
-        
+        <DockPanel Grid.Row="1" Grid.Column="1">
+            <WebBrowser DockPanel.Dock="Top" x:Name="ArticleReader"/>
+        </DockPanel>
     </Grid>
 </Window>

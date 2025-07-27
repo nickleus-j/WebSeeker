@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Text.Json;
+using Seeker.lib.Mappers;
 namespace Seeker.lib
 {
     public class WikiApiClient
@@ -106,6 +107,45 @@ namespace Seeker.lib
 
             var mapper = new OpenSearchMapper();
             OpenSearchResult result = mapper.MapOpenSearchJson(jsonObj);
+            return result;
+        }
+        public async Task<string> ParseArticlesAsync(string Title)
+        {
+            string encodedSearch = HttpUtility.UrlEncode(Title);
+
+            // Search for pages
+            string searchUrl = $"https://en.wikipedia.org/w/api.php?action=parse&page={encodedSearch}&format=json&origin=*";
+
+            try
+            {
+                string result = "[]";
+
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage response = client.GetAsync(searchUrl).Result)
+                    {
+                        using (HttpContent content = response.Content)
+                        {
+                            result = content.ReadAsStringAsync().Result;
+                        }
+                    }
+                }
+
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return $"{{ \"error\": \"{ex.Message}\" }}";
+            }
+        }
+        public async Task<WikiParseResult> GetParsedArticlesAsync(string Title)
+        {
+            string encodedSearch = HttpUtility.UrlEncode(Title);
+            string jsonObj = await ParseArticlesAsync(Title);
+
+            var mapper = new WikiParseMapper();
+            WikiParseResult result = mapper.MapParseJson(jsonObj);
             return result;
         }
     }

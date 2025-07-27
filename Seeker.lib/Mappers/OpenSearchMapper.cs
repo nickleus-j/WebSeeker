@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Seeker.lib
+namespace Seeker.lib.Mappers
 {
     public class OpenSearchMapper
     {

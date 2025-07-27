@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
-namespace Seeker.lib
+namespace Seeker.lib.Mappers
 {
     public class WikiMapper
     {
