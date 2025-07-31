@@ -20,6 +20,7 @@ namespace WebWikiSeeker
         public MainWindow()
         {
             InitializeComponent();
+            InitializeAsync();
         }
         public async Task<OpenSearchResult> SearchWiki()
         {
@@ -59,16 +60,20 @@ namespace WebWikiSeeker
         }
         private void ReadArticle_ButtonClicked(object sender, RoutedEventArgs e)
         {
-            if (sender is ArticleCard control)
+            if (sender is ArticleCard control && ArticleReader.CoreWebView2 != null)
             {
                 Dispatcher.Invoke(() =>
                 {
                     WikiApiClient wikiClient = new WikiApiClient();
                     WikiParseResult result = wikiClient.GetParsedArticlesAsync(control.Title).Result;
-                    ArticleReader.NavigateToString(result.Parse.Text.HtmlContent);
-                    //ArticleReader.Source = new Uri(control.ArticleUrl);
+                    //ArticleReader.NavigateToString(result.Parse.Text.HtmlContent);
+                    ArticleReader.Source = new Uri(control.ArticleUrl);
                 });
             }
+        }
+        async void InitializeAsync()
+        {
+            await ArticleReader.EnsureCoreWebView2Async(null);
         }
     }
 }
