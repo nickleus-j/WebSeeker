@@ -41,8 +41,7 @@ namespace WebWikiSeeker
 
             }
         }
-        public static readonly RoutedEvent FetchArticleClickEvent =
-        EventManager.RegisterRoutedEvent("FetchArticleClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ArticleCard));
+        public static readonly RoutedEvent FetchArticleClickEvent = EventManager.RegisterRoutedEvent("FetchArticleClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ArticleCard));
 
         public event RoutedEventHandler FetchArticleClick
         {
