@@ -146,6 +146,7 @@ namespace Seeker.lib
 
             var mapper = new WikiParseMapper();
             WikiParseResult result = mapper.MapParseJson(jsonObj);
+            result.Parse.Text.HtmlContent = result.Parse.Text.HtmlContent.Replace("href=\"/wiki/", "href=\"https://en.wikipedia.org/wiki/").Replace("src=\"//upload.wikimedia.org/", "src=\"https://upload.wikimedia.org/");
             return result;
         }
     }

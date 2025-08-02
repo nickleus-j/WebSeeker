@@ -66,8 +66,7 @@ namespace WebWikiSeeker
                 {
                     WikiApiClient wikiClient = new WikiApiClient();
                     WikiParseResult result = wikiClient.GetParsedArticlesAsync(control.Title).Result;
-                    //ArticleReader.NavigateToString(result.Parse.Text.HtmlContent);
-                    ArticleReader.Source = new Uri(control.ArticleUrl);
+                    ArticleReader.NavigateToString(result.Parse.Text.HtmlContent);
                 });
             }
         }
