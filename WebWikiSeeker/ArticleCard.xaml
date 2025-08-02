@@ -13,9 +13,9 @@
             <RowDefinition Height="1*" MaxHeight="50"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="22" TextWrapping="Wrap" ></TextBlock>
-        <TextBox Grid.Row="1" Text="{Binding Url, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" Margin="0,0,0,5" BorderBrush="#7F405040" BorderThickness="2"/>
+        <TextBox Grid.Row="1" Text="{Binding Url, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" Margin="0,0,0,5" BorderBrush="#7F405040" BorderThickness="2" FontFamily="Rubik"/>
         <DockPanel Grid.Row="2">
-            <Button Content="Read Content" DockPanel.Dock="Right" Click="FetchArticle_Click"/>
+            <Button Content="Read Article" DockPanel.Dock="Right" Click="FetchArticle_Click" Background="#FFB495D4" BorderBrush="#FF490F50"/>
         </DockPanel>
     </Grid>
 </UserControl>

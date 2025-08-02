@@ -28,7 +28,7 @@ namespace Seeker.lib
                     {
                         using (HttpContent content = response.Content)
                         {
-                            result = content.ReadAsStringAsync().Result;
+                            result = await content.ReadAsStringAsync();
                         }
                     }
                 }
@@ -83,7 +83,7 @@ namespace Seeker.lib
 
                 using (HttpClient client = new HttpClient())
                 {
-                    using (HttpResponseMessage response = client.GetAsync(searchUrl).Result)
+                    using (HttpResponseMessage response = await client.GetAsync(searchUrl))
                     {
                         using (HttpContent content = response.Content)
                         {
@@ -130,7 +130,6 @@ namespace Seeker.lib
                         }
                     }
                 }
-
 
                 return result;
             }
