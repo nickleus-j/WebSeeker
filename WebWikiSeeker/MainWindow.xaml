@@ -32,6 +32,9 @@
             </WrapPanel>
         </ScrollViewer>
         <DockPanel Grid.Row="1" Grid.Column="1">
+            <WrapPanel DockPanel.Dock="Bottom">
+                <Button Content="Narrate Text" x:Name="narrateBtn" Click="narrateBtn_Click" Background="DarkKhaki" IsEnabled="False"></Button>
+            </WrapPanel>
             <wv2:WebView2 DockPanel.Dock="Top" x:Name="ArticleReader"/>
         </DockPanel>
     </Grid>

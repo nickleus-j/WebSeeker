@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -73,6 +74,19 @@ namespace WebWikiSeeker
         async void InitializeAsync()
         {
             await ArticleReader.EnsureCoreWebView2Async(null);
+        }
+        async void NarrateArticleReader()
+        {
+            string webViewText = ArticleReader.CoreWebView2 != null ? await ArticleReader.ExecuteScriptAsync("document.body.innerText;") : String.Empty;
+            Narrator.Narrate(webViewText);
+        }
+        private void  narrateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                NarrateArticleReader();
+            });
+            
         }
     }
 }

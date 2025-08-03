@@ -53,5 +53,16 @@ namespace WebWikiSeeker
         {
             RaiseEvent(new RoutedEventArgs(FetchArticleClickEvent));
         }
+        async void NarrateTitle()
+        {
+            Narrator.Narrate(Title);
+        }
+        private async void Narrate_Click(object sender, RoutedEventArgs e)
+        {
+            await Task.Run(() =>
+            {
+                 NarrateTitle();
+            });
+        }
     }
 }
