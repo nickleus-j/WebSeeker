@@ -19,6 +19,12 @@
         <WrapPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <TextBlock Text="Type what you are looking for →" HorizontalAlignment="Left"/>
             <TextBox x:Name="searchBox" Text="" FontSize="14" MinWidth="200" BorderBrush="#FF10515D" BorderThickness="1" FontFamily="Trebuchet MS"  HorizontalAlignment="Center" KeyDown="OnSearchTextKeydown"></TextBox>
+            <ComboBox x:Name="limitBox">
+                <ComboBoxItem Content="10" IsSelected="True"/>
+                <ComboBoxItem Content="15"/>
+                <ComboBoxItem Content="20"/>
+                <ComboBoxItem Content="50"/>
+            </ComboBox>
             <Button Content="Search" FontFamily="Segoe UI Semibold" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" HorizontalAlignment="Right" Click="Button_Click"/>
         </WrapPanel>
         <ScrollViewer Grid.Row="1" Grid.Column="0">

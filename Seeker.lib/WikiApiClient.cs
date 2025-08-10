@@ -69,12 +69,12 @@ namespace Seeker.lib
             WikipediaSearchResult result =  mapper.MapSearchJsonToObject(jsonObj);
             return result;
         }
-        public async Task<string> SearchOpenArticlesAsync(string searchTerm)
+        public async Task<string> SearchOpenArticlesAsync(string searchTerm,string entriesLimit="10")
         {
             string encodedSearch = HttpUtility.UrlEncode(searchTerm);
 
             // Search for pages
-            string searchUrl = $"https://en.wikipedia.org/w/api.php?action=opensearch&search={encodedSearch}&limit=10&format=json&origin=*";
+            string searchUrl = $"https://en.wikipedia.org/w/api.php?action=opensearch&search={encodedSearch}&limit={entriesLimit}&format=json&origin=*";
 
 
             try
@@ -100,10 +100,10 @@ namespace Seeker.lib
                 return $"{{ \"error\": \"{ex.Message}\" }}";
             }
         }
-        public async Task<OpenSearchResult> SearchArticlesAsync(string searchTerm)
+        public async Task<OpenSearchResult> SearchArticlesAsync(string searchTerm, string entriesLimit = "10")
         {
             string encodedSearch = HttpUtility.UrlEncode(searchTerm);
-            string jsonObj = await SearchOpenArticlesAsync(searchTerm);
+            string jsonObj = await SearchOpenArticlesAsync(searchTerm, entriesLimit);
 
             var mapper = new OpenSearchMapper();
             OpenSearchResult result = mapper.MapOpenSearchJson(jsonObj);

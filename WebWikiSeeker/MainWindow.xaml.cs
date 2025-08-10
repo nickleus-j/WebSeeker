@@ -26,7 +26,8 @@ namespace WebWikiSeeker
         public async Task<OpenSearchResult> SearchWiki()
         {
             WikiApiClient client = new WikiApiClient();
-            return await client.SearchArticlesAsync(searchBox.Text);
+            ComboBoxItem selectedComboBoxItem = (ComboBoxItem)limitBox.SelectedItem;
+            return await client.SearchArticlesAsync(searchBox.Text, selectedComboBoxItem.Content.ToString());
         }
         public async Task Search()
         {
