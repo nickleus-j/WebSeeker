@@ -26,6 +26,7 @@
                 <ComboBoxItem Content="50"/>
             </ComboBox>
             <Button Content="Search" FontFamily="Segoe UI Semibold" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" HorizontalAlignment="Right" Click="Button_Click"/>
+            <Button Content="Featured Image" x:Name="ftImg" FontFamily="Segoe UI Semibold" Background="#FF77B9F5" Click="ftImg_Click"/>
         </WrapPanel>
         <ScrollViewer Grid.Row="1" Grid.Column="0">
             <WrapPanel x:Name="CardsPanel">

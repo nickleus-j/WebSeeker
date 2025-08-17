@@ -43,6 +43,15 @@ namespace WebWikiSeeker
             }
             return;
         }
+        public async Task FetchFeaturedImage()
+        {
+            WikiApiClient client = new WikiApiClient();
+            var result = await client.GetFeaturedImageTodayAsync();
+            CardsPanel.Children.Clear();
+            FeaturedImageView imgView = new FeaturedImageView(result);
+            CardsPanel.Children.Add(imgView);
+            return;
+        }
         private void OnSearchTextKeydown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
@@ -88,6 +97,14 @@ namespace WebWikiSeeker
                 NarrateArticleReader();
             });
             
+        }
+
+        private void ftImg_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                FetchFeaturedImage();
+            });
         }
     }
 }

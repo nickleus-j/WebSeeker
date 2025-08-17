@@ -148,5 +148,41 @@ namespace Seeker.lib
             result.Parse.Text.HtmlContent = result.Parse.Text.HtmlContent.Replace("href=\"/wiki/", "href=\"https://en.wikipedia.org/wiki/").Replace("src=\"//upload.wikimedia.org/", "src=\"https://upload.wikimedia.org/");
             return result;
         }
+        public async Task<string> ParseFeaturedAsync()
+        {
+            DateTime current = DateTime.UtcNow;
+            // Search for pages
+            string searchUrl = $"https://api.wikimedia.org/feed/v1/wikipedia/en/featured/{current.Year}/{current.Month.ToString("D2")}/{current.Day.ToString("D2")}";
+
+            try
+            {
+                string result = "[]";
+
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage response = client.GetAsync(searchUrl).Result)
+                    {
+                        using (HttpContent content = response.Content)
+                        {
+                            result = content.ReadAsStringAsync().Result;
+                        }
+                    }
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return $"{{ \"error\": \"{ex.Message}\" }}";
+            }
+        }
+        public async Task<FeaturedImage> GetFeaturedImageTodayAsync()
+        {
+            string jsonObj = await ParseFeaturedAsync();
+
+            var mapper = new WikiFeaturedMapper();
+            FeaturedContent resultContent = mapper.MapFeaturedJson(jsonObj);
+            return resultContent.Image;
+        }
     }
 }

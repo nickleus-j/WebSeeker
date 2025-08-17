@@ -18,4 +18,16 @@ namespace Seeker.lib.Mappers
             return JsonSerializer.Deserialize<WikipediaSearchResult>(json, options);
         }
     }
+    public class WikiFeaturedMapper
+    {
+        public FeaturedContent MapFeaturedJson(string json)
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            return JsonSerializer.Deserialize<FeaturedContent>(json, options);
+        }
+    }
 }
